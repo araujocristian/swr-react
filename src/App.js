@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Name from "./Name";
+import Stars from "./Stars";
+import { useProjectInfo } from "./useProjectInfo";
 
-function App() {
+const App = () => {
+  const { isLoading, error } = useProjectInfo();
+
+  if (isLoading) {
+    return <h1>Buscando dados do projeto...</h1>;
+  }
+
+  if (error) {
+    return <h1>Deu erro: {error.message}</h1>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Name />
+      <Stars />
+    </>
   );
-}
+};
 
 export default App;
